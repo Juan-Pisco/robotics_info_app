@@ -9,14 +9,24 @@ class Components extends StatefulWidget {
 }
 
 class _ComponentsState extends State<Components> {
+  String foto_descri =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing id dictum velit consequat. Duis semper nibh purus, quis convallis risus sodales ac. Class aptent taciti.";
+
   @override
   Widget build(BuildContext context) {
     return PageView(
       physics: BouncingScrollPhysics(),
       children: [
-        SingleComp('Fotorresistor', 'assets/images/fotor1.png',
-            'assets/images/fotor2.png', 'assets/images/fotor3.png', '', ''),
-        SingleComp('Potenciómetro', '', '', '', '', ''),
+        SingleComponent(
+            'Fotorresistor',
+            'assets/images/fotor1.png',
+            'assets/images/fotor2.png',
+            'assets/images/fotor3.png',
+            foto_descri,
+            '',
+            '',
+            ''),
+        SingleComponent('Potenciómetro', '', '', '', '', '', '', ''),
         Testing(Colors.blue),
         Testing(Colors.green),
       ],
@@ -36,16 +46,54 @@ class Testing extends StatelessWidget {
   }
 }
 
-class SingleComp extends StatelessWidget {
+class SingleComponent extends StatefulWidget {
   final String name;
   final String image1;
   final String image2;
   final String image3;
   final String description;
   final String utilities;
+  final String video1;
+  final String video2;
 
-  const SingleComp(this.name, this.image1, this.image2, this.image3,
-      this.description, this.utilities);
+  int current_section = 0;
+  Color info_color = Color(0xffBDE3BE);
+  Color videos_color = Color(0xffBDE3BE);
+  Color preguntas_color = Color(0xffBDE3BE);
+
+  SingleComponent(this.name, this.image1, this.image2, this.image3,
+      this.description, this.utilities, this.video1, this.video2);
+
+  @override
+  _SingleComponentState createState() => _SingleComponentState();
+}
+
+class _SingleComponentState extends State<SingleComponent> {
+  // TODO: Add and fix the index widgets
+
+/*   List widget_printed = [
+    ComponentDescription(widget.description, "Hola", widget.name),
+  ];
+ */
+
+  _optionSelected(int index) {
+    setState(() {
+      widget.current_section = index;
+      widget.videos_color = Color(0xffBDE3BE);
+      widget.preguntas_color = Color(0xffBDE3BE);
+      widget.info_color = Color(0xffBDE3BE);
+      if (index == 0) {
+        debugPrint("Hola");
+        widget.info_color = Color(0xff4AB14E);
+      } else if (index == 1) {
+        debugPrint("Hola2");
+        widget.videos_color = Color(0xff4AB14E);
+      } else if (index == 2) {
+        debugPrint("Hola3");
+        widget.preguntas_color = Color(0xff4AB14E);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +103,7 @@ class SingleComp extends StatelessWidget {
         children: [
           Container(
             child: Text(
-              this.name,
+              widget.name,
               style: TextStyle(
                   color: Color(0xff4AB14E),
                   fontSize: 26,
@@ -64,65 +112,104 @@ class SingleComp extends StatelessWidget {
             alignment: Alignment.topCenter,
             margin: EdgeInsets.only(top: 50),
           ),
-          CardImageList(this.image1, this.image2, this.image3),
-          NavigationRow()
-
+          CardImageList(widget.image1, widget.image2, widget.image3),
+          Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                FlatButton(
+                    onPressed: () => _optionSelected(0),
+                    child: Text(
+                      'Información',
+                      style: TextStyle(
+                          fontSize: 18.5,
+                          color: widget.info_color,
+                          fontWeight: FontWeight.w600),
+                    )),
+                FlatButton(
+                    onPressed: () => _optionSelected(1),
+                    child: Text(
+                      'Videos',
+                      style: TextStyle(
+                          fontSize: 18.5,
+                          color: widget.videos_color,
+                          fontWeight: FontWeight.w600),
+                    )),
+                FlatButton(
+                    onPressed: () => _optionSelected(2),
+                    child: Text(
+                      'Preguntas',
+                      style: TextStyle(
+                          fontSize: 18.5,
+                          color: widget.preguntas_color,
+                          fontWeight: FontWeight.w600),
+                    )),
+              ],
+            ),
+          ),
+          //widget.widget_printed[widget.current_section],
+          ComponentDescription(widget.description, "Hola", widget.name),
         ],
       ),
     );
   }
 }
 
-class NavigationRow extends StatefulWidget {
-  const NavigationRow({ Key key }) : super(key: key);
-
-  @override
-  _NavigationRowState createState() => _NavigationRowState();
-}
-
-class _NavigationRowState extends State<NavigationRow> {
-  
-  int current_section = 0;
-  Color info_color = Color(0xffBDE3BE);
-  Color videos_color = Color(0xffBDE3BE);
-  Color preguntas_color = Color(0xffBDE3BE);
-  
-   _optionSelected(int index) {
-    setState(() {
-      current_section = index;
-      videos_color = Color(0xffBDE3BE);
-      preguntas_color = Color(0xffBDE3BE);
-      info_color = Color(0xffBDE3BE);
-      if (index == 0) {
-        debugPrint("Hola");
-        info_color = Color(0xff4AB14E);
-      }
-      else if (index == 1) {
-        debugPrint("Hola2");
-        videos_color = Color(0xff4AB14E);
-      }else if (index == 2) {
-        debugPrint("Hola3");
-        preguntas_color = Color(0xff4AB14E);
-      }
-    });
-
-  }
-
+class ComponentDescription extends StatelessWidget {
+  final String description_text;
+  final String utilities_text;
+  final String name;
+  const ComponentDescription(
+      this.description_text, this.utilities_text, this.name);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left:28.0),
-      child: ButtonBar(
-        //mainAxisSize: MainAxisSize.values[1],
-        buttonPadding: EdgeInsets.only(right:1, top: 8, left: 8, bottom: 8),
-        alignment: MainAxisAlignment.start,
-        children: [
-          FlatButton(onPressed: _optionSelected(0), child: Text('Información', style: TextStyle(fontSize: 17, color: info_color),)),
-          FlatButton(onPressed: _optionSelected(1), child: Text('Videos', style: TextStyle(fontSize: 17, color: videos_color),)),
-          FlatButton(onPressed: _optionSelected(2), child: Text('Preguntas', style: TextStyle(fontSize: 17, color: preguntas_color),)),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, top: 10),
+              child: Text(
+                '¿Qué es el ${this.name.toLowerCase()}?',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+              ),
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+              child: Text(
+                this.description_text,
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, top: 10),
+              child: Text(
+                '¿Dónde lo podemos encontrar?',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+              ),
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+              child: Text(
+                this.utilities_text,
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

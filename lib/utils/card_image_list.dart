@@ -14,7 +14,7 @@ class CardImageList extends StatelessWidget {
     return Container(
       height: 250.0,
       child: ListView(
-        padding: EdgeInsets.only(top:0, left: 28, right: 28, bottom: 20 ),
+        padding: EdgeInsets.only(top:0, left: 0, right: 28, bottom: 20 ),
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
         children: <Widget>[
