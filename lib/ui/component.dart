@@ -61,8 +61,11 @@ class SingleComponent extends StatefulWidget {
   Color videos_color = Color(0xffBDE3BE);
   Color preguntas_color = Color(0xffBDE3BE);
 
+
   SingleComponent(this.name, this.image1, this.image2, this.image3,
       this.description, this.utilities, this.video1, this.video2);
+
+
 
   @override
   _SingleComponentState createState() => _SingleComponentState();
@@ -71,10 +74,10 @@ class SingleComponent extends StatefulWidget {
 class _SingleComponentState extends State<SingleComponent> {
   // TODO: Add and fix the index widgets
 
-/*   List widget_printed = [
-    ComponentDescription(widget.description, "Hola", widget.name),
-  ];
- */
+ /*     var temp = ComponentDescription(this.description, "Hola", name);
+      List widget_printed = [
+      temp,
+      ]; */
 
   _optionSelected(int index) {
     setState(() {
@@ -83,13 +86,13 @@ class _SingleComponentState extends State<SingleComponent> {
       widget.preguntas_color = Color(0xffBDE3BE);
       widget.info_color = Color(0xffBDE3BE);
       if (index == 0) {
-        debugPrint("Hola");
+        debugPrint('${widget.current_section}');
         widget.info_color = Color(0xff4AB14E);
       } else if (index == 1) {
-        debugPrint("Hola2");
+        debugPrint("${widget.current_section}");
         widget.videos_color = Color(0xff4AB14E);
       } else if (index == 2) {
-        debugPrint("Hola3");
+        debugPrint("${widget.current_section}");
         widget.preguntas_color = Color(0xff4AB14E);
       }
     });
@@ -119,6 +122,8 @@ class _SingleComponentState extends State<SingleComponent> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 FlatButton(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                     onPressed: () => _optionSelected(0),
                     child: Text(
                       'Información',
@@ -128,6 +133,8 @@ class _SingleComponentState extends State<SingleComponent> {
                           fontWeight: FontWeight.w600),
                     )),
                 FlatButton(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                     onPressed: () => _optionSelected(1),
                     child: Text(
                       'Videos',
@@ -137,6 +144,8 @@ class _SingleComponentState extends State<SingleComponent> {
                           fontWeight: FontWeight.w600),
                     )),
                 FlatButton(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                     onPressed: () => _optionSelected(2),
                     child: Text(
                       'Preguntas',
@@ -148,7 +157,7 @@ class _SingleComponentState extends State<SingleComponent> {
               ],
             ),
           ),
-          //widget.widget_printed[widget.current_section],
+          //widget_printed[widget.current_section],
           ComponentDescription(widget.description, "Hola", widget.name),
         ],
       ),
