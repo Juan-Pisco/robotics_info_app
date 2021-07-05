@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:robotics_community_app/ui/component.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
-
-  static const String _title = 'Flutter Code Sample';
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-    );
-  }
-}
-
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key key}) : super(key: key);
 
@@ -50,11 +36,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         backgroundColor: Color(0xff439E65),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 25,),
+            icon: Icon(
+              Icons.home,
+              size: 25,
+            ),
             label: 'Inicio',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.lightbulb, size: 25,),
+            icon: Icon(
+              Icons.lightbulb,
+              size: 25,
+            ),
             label: 'Componentes',
           ),
         ],

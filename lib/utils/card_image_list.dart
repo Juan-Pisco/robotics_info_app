@@ -12,9 +12,10 @@ class CardImageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left:0, right:10),
       height: 250.0,
       child: ListView(
-        padding: EdgeInsets.only(top:0, left: 0, right: 28, bottom: 20 ),
+        padding: EdgeInsets.only(top:0, left: 10, right: 10, bottom: 20 ),
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(),
         children: <Widget>[
