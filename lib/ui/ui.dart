@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:robotics_community_app/ui/component.dart';
+import 'component.dart';
 
 class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key key}) : super(key: key);
+  const MyStatefulWidget({Key ?key}) : super(key: key);
 
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();

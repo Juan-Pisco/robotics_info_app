@@ -1,4 +1,4 @@
-# robotics_community_app
+# robotics_app
 
 A new Flutter project.
 

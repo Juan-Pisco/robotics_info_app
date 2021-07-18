@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:robotics_community_app/utils/card_image_list.dart';
+import 'package:robotics_app/utils/card_image_list.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Components extends StatefulWidget {
-  const Components({Key key}) : super(key: key);
+  const Components({Key? key}) : super(key: key);
 
   @override
   _ComponentsState createState() => _ComponentsState();
@@ -180,7 +181,6 @@ class _SingleComponentState extends State<SingleComponent> {
               ],
             ),
           ),
-
           Expanded(
             child: PageView(
               controller: pageController,
@@ -286,11 +286,11 @@ class ComponentVideos extends StatelessWidget {
   final String video2txt;
   final String video1;
   final String video2;
-  
+  late var video1_id = YoutubePlayer.convertUrlToId(video1).toString();
+  late YoutubePlayerController _controller = YoutubePlayerController(initialVideoId: video1_id, flags: YoutubePlayerFlags(autoPlay:false, mute: false));
 
-  const ComponentVideos(
-      this.video1, this.video2, this.video1txt, this.video2txt);
-  
+  ComponentVideos(this.video1, this.video2, this.video1txt, this.video2txt);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -302,12 +302,14 @@ class ComponentVideos extends StatelessWidget {
             child: Column(
               children: [
                 Text('${this.video1txt}'),
-                //YoutubePlayer(context: context, videoId: YoutubePlayer.convertUrlToId(this.video1))
+                YoutubePlayer(
+                    controller: _controller,
+                    
+                    )
               ],
-            ),alignment: Alignment.topCenter,
             ),
-          
-          
+            alignment: Alignment.topCenter,
+          ),
         ],
       ),
     );
