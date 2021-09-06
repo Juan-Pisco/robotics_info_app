@@ -29,7 +29,7 @@ class _ComponentsState extends State<Components> {
             foto_descri,
             foto_uti,
             'https://stackoverflow.com/questions/43583411/how-to-create-a-hyperlink-in-flutter-widget',
-            'https://www.youtube.com/watch?v=dVXJDjgCpho',
+            'https://www.youtube.com/watch?v=RbZWnSL40a4',
             '',
             '¿Por qué pregunta 1?',
             '¿Por qué pregunta 2?'),
@@ -145,9 +145,8 @@ class _SingleComponentState extends State<SingleComponent> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                FlatButton(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
+                TextButton(
+                    style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent)),
                     onPressed: () => _optionSelected(0),
                     child: Text(
                       'Información',
@@ -156,9 +155,8 @@ class _SingleComponentState extends State<SingleComponent> {
                           color: widget.info_color,
                           fontWeight: FontWeight.w600),
                     )),
-                FlatButton(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
+                TextButton(
+                    style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent)),
                     onPressed: () => _optionSelected(1),
                     child: Text(
                       'Videos',
@@ -167,10 +165,9 @@ class _SingleComponentState extends State<SingleComponent> {
                           color: widget.videos_color,
                           fontWeight: FontWeight.w600),
                     )),
-                FlatButton(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
+                TextButton(
                     onPressed: () => _optionSelected(2),
+                    style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent)),
                     child: Text(
                       'Preguntas',
                       style: TextStyle(
@@ -287,31 +284,28 @@ class ComponentVideos extends StatelessWidget {
   final String video1;
   final String video2;
   late var video1_id = YoutubePlayer.convertUrlToId(video1).toString();
-  late YoutubePlayerController _controller = YoutubePlayerController(initialVideoId: video1_id, flags: YoutubePlayerFlags(autoPlay:false, mute: false));
-
+  //late YoutubePlayerController _controller = YoutubePlayerController(initialVideoId: video1_id, flags: YoutubePlayerFlags(autoPlay:true, mute: true));
+  late YoutubePlayerController _controller;
+  //late var video1_widget =  YoutubePlayer(controller: _controller, onReady:(){_controller.play();} ,);
   ComponentVideos(this.video1, this.video2, this.video1txt, this.video2txt);
-
+  @override
+  void initState() {
+     _controller = YoutubePlayerController(
+      initialVideoId:
+          video1_id,
+      flags: YoutubePlayerFlags(
+          mute: false,
+          autoPlay: true,
+          disableDragSeek: true,
+          loop: false,
+          enableCaption: false),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 0, left: 15, right: 15),
-      child: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          Container(
-            child: Column(
-              children: [
-                Text('${this.video1txt}'),
-                YoutubePlayer(
-                    controller: _controller,
-                    
-                    )
-              ],
-            ),
-            alignment: Alignment.topCenter,
-          ),
-        ],
-      ),
+      alignment: Alignment.topCenter,
+      child: Text('Holis'),
     );
   }
 }
