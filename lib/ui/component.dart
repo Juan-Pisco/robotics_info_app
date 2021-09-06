@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:robotics_app/utils/card_image_list.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Components extends StatefulWidget {
   const Components({Key? key}) : super(key: key);
@@ -283,29 +282,13 @@ class ComponentVideos extends StatelessWidget {
   final String video2txt;
   final String video1;
   final String video2;
-  late var video1_id = YoutubePlayer.convertUrlToId(video1).toString();
-  //late YoutubePlayerController _controller = YoutubePlayerController(initialVideoId: video1_id, flags: YoutubePlayerFlags(autoPlay:true, mute: true));
-  late YoutubePlayerController _controller;
-  //late var video1_widget =  YoutubePlayer(controller: _controller, onReady:(){_controller.play();} ,);
   ComponentVideos(this.video1, this.video2, this.video1txt, this.video2txt);
   @override
-  void initState() {
-     _controller = YoutubePlayerController(
-      initialVideoId:
-          video1_id,
-      flags: YoutubePlayerFlags(
-          mute: false,
-          autoPlay: true,
-          disableDragSeek: true,
-          loop: false,
-          enableCaption: false),
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topCenter,
-      child: Text('Holis'),
+      child: Text('$video1txt'),
     );
   }
 }
