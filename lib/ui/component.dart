@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:robotics_app/utils/card_image_list.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_link_preview/flutter_link_preview.dart';
 
 class Components extends StatefulWidget {
   const Components({Key? key}) : super(key: key);
